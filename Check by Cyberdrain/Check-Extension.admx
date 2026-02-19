@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="cyberdrain" namespace="CyberDrain.Policies.Check" />
+  </policyNamespaces>
+
+  <supersededAdm fileName="" />
+
+  <resources minRequiredRevision="1.0" />
+
+  <categories>
+    <category name="CyberDrain" displayName="$(string.CyberDrain)" />
+    <category name="CheckExtension" displayName="$(string.CheckExtension)">
+      <parentCategory ref="CyberDrain" />
+    </category>
+    <category name="CheckExtensionEdge" displayName="$(string.CheckExtensionEdge)">
+      <parentCategory ref="CheckExtension" />
+    </category>
+    <category name="CheckExtensionChrome" displayName="$(string.CheckExtensionChrome)">
+      <parentCategory ref="CheckExtension" />
+    </category>
+  </categories>
+
+  <policies>
+    <!-- EDGE EXTENSION POLICIES -->
+
+    <!-- Extension Settings - Edge -->
+    <policy name="CheckExtensionSettingsEdge" class="Machine" displayName="$(string.CheckExtensionSettingsEdge)" explainText="$(string.CheckExtensionSettingsEdge_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\ExtensionSettings\knepjpocdagponkonnbggpcnhnaikajg">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledList>
+        <item key="SOFTWARE\Policies\Microsoft\Edge\ExtensionSettings\knepjpocdagponkonnbggpcnhnaikajg" valueName="installation_mode">
+          <value>
+            <string>force_installed</string>
+          </value>
+        </item>
+        <item key="SOFTWARE\Policies\Microsoft\Edge\ExtensionSettings\knepjpocdagponkonnbggpcnhnaikajg" valueName="update_url">
+          <value>
+            <string>https://edge.microsoft.com/extensionwebstorebase/v1/crx</string>
+          </value>
+        </item>
+        <item key="SOFTWARE\Policies\Microsoft\Edge\ExtensionSettings\knepjpocdagponkonnbggpcnhnaikajg" valueName="toolbar_pin">
+          <value>
+            <string>force_pinned</string>
+          </value>
+        </item>
+      </enabledList>
+    </policy>
+
+    <!-- Enable Notifications -->
+    <policy name="CheckShowNotifications" class="Machine" displayName="$(string.CheckShowNotifications)" explainText="$(string.CheckShowNotifications_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" valueName="showNotifications">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- Enable Valid Page Badge -->
+    <policy name="CheckValidPageBadge" class="Machine" displayName="$(string.CheckValidPageBadge)" explainText="$(string.CheckValidPageBadge_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" valueName="enableValidPageBadge">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- Enable Page Blocking -->
+    <policy name="CheckPageBlocking" class="Machine" displayName="$(string.CheckPageBlocking)" explainText="$(string.CheckPageBlocking_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" valueName="enablePageBlocking">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- Enable CIPP Reporting -->
+    <policy name="CheckCippReporting" class="Machine" displayName="$(string.CheckCippReporting)" explainText="$(string.CheckCippReporting_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" valueName="enableCippReporting">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- CIPP Server URL -->
+    <policy name="CheckCippServerUrl" class="Machine" displayName="$(string.CheckCippServerUrl)" explainText="$(string.CheckCippServerUrl_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" presentation="$(presentation.CheckCippServerUrl)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CippServerUrl" valueName="cippServerUrl" />
+      </elements>
+    </policy>
+
+    <!-- CIPP Tenant ID -->
+    <policy name="CheckCippTenantId" class="Machine" displayName="$(string.CheckCippTenantId)" explainText="$(string.CheckCippTenantId_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" presentation="$(presentation.CheckCippTenantId)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CippTenantId" valueName="cippTenantId" />
+      </elements>
+    </policy>
+
+    <!-- Custom Rules URL -->
+    <policy name="CheckCustomRulesUrl" class="Machine" displayName="$(string.CheckCustomRulesUrl)" explainText="$(string.CheckCustomRulesUrl_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" presentation="$(presentation.CheckCustomRulesUrl)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CustomRulesUrl" valueName="customRulesUrl" />
+      </elements>
+    </policy>
+
+    <!-- Update Interval -->
+    <policy name="CheckUpdateInterval" class="Machine" displayName="$(string.CheckUpdateInterval)" explainText="$(string.CheckUpdateInterval_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" presentation="$(presentation.CheckUpdateInterval)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <decimal id="UpdateInterval" valueName="updateInterval" minValue="1" maxValue="168" />
+      </elements>
+    </policy>
+
+    <!-- URL Allowlist -->
+    <policy name="CheckUrlAllowlist" class="Machine" displayName="$(string.CheckUrlAllowlist)" explainText="$(string.CheckUrlAllowlist_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" presentation="$(presentation.CheckUrlAllowlist)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <list id="UrlAllowlistList" valueName="urlAllowlist" />
+      </elements>
+    </policy>
+
+    <!-- Company Name -->
+    <policy name="CheckCompanyName" class="Machine" displayName="$(string.CheckCompanyName)" explainText="$(string.CheckCompanyName_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy\customBranding" presentation="$(presentation.CheckCompanyName)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CompanyName" valueName="companyName" />
+      </elements>
+    </policy>
+
+    <!-- Product Name -->
+    <policy name="CheckProductName" class="Machine" displayName="$(string.CheckProductName)" explainText="$(string.CheckProductName_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy\customBranding" presentation="$(presentation.CheckProductName)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="ProductName" valueName="productName" />
+      </elements>
+    </policy>
+
+    <!-- Support Email -->
+    <policy name="CheckSupportEmail" class="Machine" displayName="$(string.CheckSupportEmail)" explainText="$(string.CheckSupportEmail_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy\customBranding" presentation="$(presentation.CheckSupportEmail)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="SupportEmail" valueName="supportEmail" />
+      </elements>
+    </policy>
+
+    <!-- Primary Color -->
+    <policy name="CheckPrimaryColor" class="Machine" displayName="$(string.CheckPrimaryColor)" explainText="$(string.CheckPrimaryColor_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy\customBranding" presentation="$(presentation.CheckPrimaryColor)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="PrimaryColor" valueName="primaryColor" />
+      </elements>
+    </policy>
+
+    <!-- Logo URL -->
+    <policy name="CheckLogoUrl" class="Machine" displayName="$(string.CheckLogoUrl)" explainText="$(string.CheckLogoUrl_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy\customBranding" presentation="$(presentation.CheckLogoUrl)">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="LogoUrl" valueName="logoUrl" />
+      </elements>
+    </policy>
+
+    <!-- Enable Debug Logging -->
+    <policy name="CheckDebugLogging" class="Machine" displayName="$(string.CheckDebugLogging)" explainText="$(string.CheckDebugLogging_Explain)" key="SOFTWARE\Policies\Microsoft\Edge\3rdparty\extensions\knepjpocdagponkonnbggpcnhnaikajg\policy" valueName="enableDebugLogging">
+      <parentCategory ref="CheckExtensionEdge" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- CHROME EXTENSION POLICIES -->
+
+    <!-- Extension Settings - Chrome -->
+    <policy name="CheckExtensionSettingsChrome" class="Machine" displayName="$(string.CheckExtensionSettingsChrome)" explainText="$(string.CheckExtensionSettingsChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\ExtensionSettings\benimdeioplgkhanklclahllklceahbe">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledList>
+        <item key="SOFTWARE\Policies\Google\Chrome\ExtensionSettings\benimdeioplgkhanklclahllklceahbe" valueName="installation_mode">
+          <value>
+            <string>force_installed</string>
+          </value>
+        </item>
+        <item key="SOFTWARE\Policies\Google\Chrome\ExtensionSettings\benimdeioplgkhanklclahllklceahbe" valueName="update_url">
+          <value>
+            <string>https://clients2.google.com/service/update2/crx</string>
+          </value>
+        </item>
+        <item key="SOFTWARE\Policies\Google\Chrome\ExtensionSettings\benimdeioplgkhanklclahllklceahbe" valueName="toolbar_pin">
+          <value>
+            <string>force_pinned</string>
+          </value>
+        </item>
+      </enabledList>
+    </policy>
+
+    <!-- Enable Notifications - Chrome -->
+    <policy name="CheckShowNotificationsChrome" class="Machine" displayName="$(string.CheckShowNotificationsChrome)" explainText="$(string.CheckShowNotificationsChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" valueName="showNotifications">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- Valid Page Badge - Chrome -->
+    <policy name="CheckValidPageBadgeChrome" class="Machine" displayName="$(string.CheckValidPageBadgeChrome)" explainText="$(string.CheckValidPageBadgeChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" valueName="enableValidPageBadge">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- Page Blocking - Chrome -->
+    <policy name="CheckPageBlockingChrome" class="Machine" displayName="$(string.CheckPageBlockingChrome)" explainText="$(string.CheckPageBlockingChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" valueName="enablePageBlocking">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- CIPP Reporting - Chrome -->
+    <policy name="CheckCippReportingChrome" class="Machine" displayName="$(string.CheckCippReportingChrome)" explainText="$(string.CheckCippReportingChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" valueName="enableCippReporting">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+
+    <!-- CIPP Server URL - Chrome -->
+    <policy name="CheckCippServerUrlChrome" class="Machine" displayName="$(string.CheckCippServerUrlChrome)" explainText="$(string.CheckCippServerUrlChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" presentation="$(presentation.CheckCippServerUrlChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CippServerUrlChrome" valueName="cippServerUrl" />
+      </elements>
+    </policy>
+
+    <!-- CIPP Tenant ID - Chrome -->
+    <policy name="CheckCippTenantIdChrome" class="Machine" displayName="$(string.CheckCippTenantIdChrome)" explainText="$(string.CheckCippTenantIdChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" presentation="$(presentation.CheckCippTenantIdChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CippTenantIdChrome" valueName="cippTenantId" />
+      </elements>
+    </policy>
+
+    <!-- Custom Rules URL - Chrome -->
+    <policy name="CheckCustomRulesUrlChrome" class="Machine" displayName="$(string.CheckCustomRulesUrlChrome)" explainText="$(string.CheckCustomRulesUrlChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" presentation="$(presentation.CheckCustomRulesUrlChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CustomRulesUrlChrome" valueName="customRulesUrl" />
+      </elements>
+    </policy>
+
+    <!-- Update Interval - Chrome -->
+    <policy name="CheckUpdateIntervalChrome" class="Machine" displayName="$(string.CheckUpdateIntervalChrome)" explainText="$(string.CheckUpdateIntervalChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" presentation="$(presentation.CheckUpdateIntervalChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <decimal id="UpdateIntervalChrome" valueName="updateInterval" minValue="1" maxValue="168" />
+      </elements>
+    </policy>
+
+    <!-- URL Allowlist - Chrome -->
+    <policy name="CheckUrlAllowlistChrome" class="Machine" displayName="$(string.CheckUrlAllowlistChrome)" explainText="$(string.CheckUrlAllowlistChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" presentation="$(presentation.CheckUrlAllowlistChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <list id="UrlAllowlistListChrome" valueName="urlAllowlist" />
+      </elements>
+    </policy>
+
+    <!-- Company Name - Chrome -->
+    <policy name="CheckCompanyNameChrome" class="Machine" displayName="$(string.CheckCompanyNameChrome)" explainText="$(string.CheckCompanyNameChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy\customBranding" presentation="$(presentation.CheckCompanyNameChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="CompanyNameChrome" valueName="companyName" />
+      </elements>
+    </policy>
+
+    <!-- Product Name - Chrome -->
+    <policy name="CheckProductNameChrome" class="Machine" displayName="$(string.CheckProductNameChrome)" explainText="$(string.CheckProductNameChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy\customBranding" presentation="$(presentation.CheckProductNameChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="ProductNameChrome" valueName="productName" />
+      </elements>
+    </policy>
+
+    <!-- Support Email - Chrome -->
+    <policy name="CheckSupportEmailChrome" class="Machine" displayName="$(string.CheckSupportEmailChrome)" explainText="$(string.CheckSupportEmailChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy\customBranding" presentation="$(presentation.CheckSupportEmailChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="SupportEmailChrome" valueName="supportEmail" />
+      </elements>
+    </policy>
+
+    <!-- Primary Color - Chrome -->
+    <policy name="CheckPrimaryColorChrome" class="Machine" displayName="$(string.CheckPrimaryColorChrome)" explainText="$(string.CheckPrimaryColorChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy\customBranding" presentation="$(presentation.CheckPrimaryColorChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="PrimaryColorChrome" valueName="primaryColor" />
+      </elements>
+    </policy>
+
+    <!-- Logo URL - Chrome -->
+    <policy name="CheckLogoUrlChrome" class="Machine" displayName="$(string.CheckLogoUrlChrome)" explainText="$(string.CheckLogoUrlChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy\customBranding" presentation="$(presentation.CheckLogoUrlChrome)">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <elements>
+        <text id="LogoUrlChrome" valueName="logoUrl" />
+      </elements>
+    </policy>
+
+    <!-- Enable Debug Logging - Chrome -->
+    <policy name="CheckDebugLoggingChrome" class="Machine" displayName="$(string.CheckDebugLoggingChrome)" explainText="$(string.CheckDebugLoggingChrome_Explain)" key="SOFTWARE\Policies\Google\Chrome\3rdparty\extensions\benimdeioplgkhanklclahllklceahbe\policy" valueName="enableDebugLogging">
+      <parentCategory ref="CheckExtensionChrome" />
+      <supportedOn ref="SUPPORTED_WIN7" />
+      <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+    </policy>
+  </policies>
+</policyDefinitions>
+
+
+

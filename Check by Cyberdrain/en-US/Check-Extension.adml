@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <displayName />
+  <description />
+  <resources>
+    <stringTable>
+      <!-- Category -->
+      <string id="CyberDrain">CyberDrain</string>
+      <string id="CheckExtension">Check - Phishing Protection</string>
+      <string id="CheckExtensionEdge">Microsoft Edge</string>
+      <string id="CheckExtensionChrome">Google Chrome</string>
+
+      <!-- Extension Settings - Edge -->
+      <string id="CheckExtensionSettingsEdge">Configure Check extension installation (Edge)</string>
+      <string id="CheckExtensionSettingsEdge_Explain">This policy configures the installation mode for the Check extension in Microsoft Edge, ensuring it is force-installed and pinned to the toolbar.
+
+The extension will be:
+- Force installed (cannot be removed by users)
+- Automatically updated from the Edge Add-ons store
+- Pinned to the browser toolbar
+
+Extension ID: knepjpocdagponkonnbggpcnhnaikajg</string>
+
+      <!-- Extension Settings - Chrome -->
+      <string id="CheckExtensionSettingsChrome">Configure Check extension installation (Chrome)</string>
+      <string id="CheckExtensionSettingsChrome_Explain">This policy configures the installation mode for the Check extension in Google Chrome, ensuring it is force-installed and pinned to the toolbar.
+
+The extension will be:
+- Force installed (cannot be removed by users)
+- Automatically updated from the Chrome Web Store
+- Pinned to the browser toolbar
+
+Extension ID: benimdeioplgkhanklclahllklceahbe</string>
+
+      <!-- Show Notifications -->
+      <string id="CheckShowNotifications">Display security notifications</string>
+      <string id="CheckShowNotifications_Explain">This policy controls whether the Check extension displays security notifications and warnings to users.
+
+When enabled (default): Users will see notifications when phishing attempts are detected or blocked.
+When disabled: The extension operates silently without displaying notifications.</string>
+
+      <!-- Show Notifications - Edge -->
+      <string id="CheckShowNotificationsEdge">Display security notifications (Edge)</string>
+      <string id="CheckShowNotificationsEdge_Explain">This policy controls whether the Check extension displays security notifications and warnings to users in Microsoft Edge.
+
+When enabled (default): Users will see notifications when phishing attempts are detected or blocked.
+When disabled: The extension operates silently without displaying notifications.</string>
+
+      <!-- Show Notifications - Chrome -->
+      <string id="CheckShowNotificationsChrome">Display security notifications (Chrome)</string>
+      <string id="CheckShowNotificationsChrome_Explain">This policy controls whether the Check extension displays security notifications and warnings to users in Google Chrome.
+
+When enabled (default): Users will see notifications when phishing attempts are detected or blocked.
+When disabled: The extension operates silently without displaying notifications.</string>
+
+      <!-- Valid Page Badge -->
+      <string id="CheckValidPageBadge">Show valid page badge</string>
+      <string id="CheckValidPageBadge_Explain">This policy controls whether the Check extension displays a validation badge on legitimate Microsoft login pages.
+
+When enabled (default): A green badge or indicator shows when users are on a verified Microsoft login page.
+When disabled: No visual indicator is shown for valid pages.</string>
+
+      <!-- Page Blocking -->
+      <string id="CheckPageBlocking">Enable page blocking</string>
+      <string id="CheckPageBlocking_Explain">This policy controls whether the Check extension blocks access to detected phishing pages.
+
+When enabled (default): Suspicious and phishing pages are blocked with a warning screen.
+When disabled: Pages are only flagged but not blocked (warning mode only).</string>
+
+      <!-- CIPP Reporting -->
+      <string id="CheckCippReporting">Enable CIPP reporting</string>
+      <string id="CheckCippReporting_Explain">This policy controls whether the Check extension reports security events to a CIPP (CyberDrain Improved Partner Portal) server.
+
+When enabled: Security events are sent to the configured CIPP server for centralized monitoring.
+When disabled (default): No reporting to external servers occurs.
+
+Note: Requires CIPP Server URL to be configured.</string>
+
+      <!-- CIPP Server URL -->
+      <string id="CheckCippServerUrl">CIPP server URL</string>
+      <string id="CheckCippServerUrl_Explain">This policy specifies the base URL for the CIPP server where security events should be reported.
+
+Example: https://cipp.yourcompany.com
+
+This setting is only used when CIPP reporting is enabled. The URL should point to a valid CIPP server instance.</string>
+
+      <!-- CIPP Tenant ID -->
+      <string id="CheckCippTenantId">CIPP tenant identifier</string>
+      <string id="CheckCippTenantId_Explain">This policy specifies the tenant identifier to include with CIPP alerts for multi-tenant environments.
+
+Example: contoso.onmicrosoft.com
+
+This helps identify which tenant/organization the security event originated from when using a shared CIPP instance.</string>
+
+      <!-- Custom Rules URL -->
+      <string id="CheckCustomRulesUrl">Custom detection rules URL</string>
+      <string id="CheckCustomRulesUrl_Explain">This policy specifies a custom URL from which the extension should fetch detection rules.
+
+Example: https://yourcompany.com/detection-rules.json
+
+When specified, the extension will download detection rules from this URL instead of using the default rules. Leave empty to use default detection rules.
+
+The URL must serve a valid JSON file matching the detection rules schema.</string>
+
+      <!-- Update Interval -->
+      <string id="CheckUpdateInterval">Detection rules update interval</string>
+      <string id="CheckUpdateInterval_Explain">This policy specifies how often (in hours) the extension should check for updates to detection rules.
+
+Default: 24 hours
+Range: 1-168 hours (1 hour to 1 week)
+
+More frequent updates provide better protection but may increase network usage.</string>
+
+      <!-- URL Allowlist -->
+      <string id="CheckUrlAllowlist">URL allowlist (URLs with wildcards or regex patterns)</string>
+      <string id="CheckUrlAllowlist_Explain">This policy specifies a list of URL patterns or regex patterns to allowlist URLs from detection.
+
+These patterns will be added to the exclusion rules without replacing the entire ruleset. You can use simple URLs with wildcards or advanced regex patterns.
+
+Simple URL examples with wildcards:
+- https://google.com/*
+- https://*.microsoft.com/*
+- https://login.microsoftonline.com/*
+
+Advanced regex examples:
+- ^https://trusted\.example\.com/.*
+- ^https://.*\.microsoft\.com/.*
+
+URLs matching any of these patterns will bypass phishing detection.</string>
+
+      <!-- URL Allowlist - Chrome -->
+      <string id="CheckUrlAllowlistChrome">URL allowlist (URLs with wildcards or regex patterns) (Chrome)</string>
+      <string id="CheckUrlAllowlistChrome_Explain">This policy specifies a list of URL patterns or regex patterns to allowlist URLs from detection in Google Chrome.
+
+These patterns will be added to the exclusion rules without replacing the entire ruleset. You can use simple URLs with wildcards or advanced regex patterns.
+
+Simple URL examples with wildcards:
+- https://google.com/*
+- https://*.microsoft.com/*
+- https://login.microsoftonline.com/*
+
+Advanced regex examples:
+- ^https://trusted\.example\.com/.*
+- ^https://.*\.microsoft\.com/.*
+
+URLs matching any of these patterns will bypass phishing detection.</string>
+
+      <!-- Company Name -->
+      <string id="CheckCompanyName">Company name</string>
+      <string id="CheckCompanyName_Explain">This policy specifies the company name to display in the extension's user interface for branding purposes.
+
+Example: Contoso Corporation
+
+The company name appears in the extension popup and settings pages.</string>
+
+      <!-- Product Name -->
+      <string id="CheckProductName">Product name</string>
+      <string id="CheckProductName_Explain">This policy specifies a custom product name for the extension.
+
+Example: Contoso Security Guard
+
+This allows organizations to rebrand the extension with their own product name.</string>
+
+      <!-- Support Email -->
+      <string id="CheckSupportEmail">Support email address</string>
+      <string id="CheckSupportEmail_Explain">This policy specifies the email address users should contact for support with the extension.
+
+Example: security@contoso.com
+
+This email address is displayed in the extension interface and help documentation.</string>
+
+      <!-- Primary Color -->
+      <string id="CheckPrimaryColor">Primary theme color</string>
+      <string id="CheckPrimaryColor_Explain">This policy specifies the primary theme color for the extension interface using a hex color code.
+
+Example: #0078D4
+
+The color should be in hex format (e.g., #FF0000 for red, #0078D4 for Microsoft blue). This color is used for UI elements and branding throughout the extension.</string>
+
+      <!-- Logo URL -->
+      <string id="CheckLogoUrl">Company logo URL</string>
+      <string id="CheckLogoUrl_Explain">This policy specifies the URL to a company logo that will be displayed in the extension interface.
+
+Example: https://yourcompany.com/logo.png
+
+The logo should be a square image (recommended size: 48x48 to 128x128 pixels) in PNG, SVG, or other web-compatible format. The logo will be displayed in the extension popup and blocked page.</string>
+
+      <!-- Debug Logging -->
+      <string id="CheckDebugLogging">Enable debug logging</string>
+      <string id="CheckDebugLogging_Explain">This policy controls whether the Check extension generates detailed debug logs for troubleshooting purposes.
+
+When enabled: Verbose logging is activated and can be viewed in browser developer tools.
+When disabled (default): Only essential logging occurs.
+
+Debug logging should only be enabled for troubleshooting as it may impact performance and generate large log files.</string>
+
+      <!-- Debug Logging - Chrome -->
+      <string id="CheckDebugLoggingChrome">Enable debug logging (Chrome)</string>
+      <string id="CheckDebugLoggingChrome_Explain">This policy controls whether the Check extension generates detailed debug logs for troubleshooting purposes in Google Chrome.
+
+When enabled: Verbose logging is activated and can be viewed in browser developer tools.
+When disabled (default): Only essential logging occurs.
+
+Debug logging should only be enabled for troubleshooting as it may impact performance and generate large log files.</string>
+
+      <!-- Valid Page Badge - Chrome -->
+      <string id="CheckValidPageBadgeChrome">Show valid page badge (Chrome)</string>
+      <string id="CheckValidPageBadgeChrome_Explain">This policy controls whether the Check extension displays a validation badge on legitimate Microsoft login pages in Google Chrome.
+
+When enabled (default): A green badge or indicator shows when users are on a verified Microsoft login page.
+When disabled: No visual indicator is shown for valid pages.</string>
+
+      <!-- Page Blocking - Chrome -->
+      <string id="CheckPageBlockingChrome">Enable page blocking (Chrome)</string>
+      <string id="CheckPageBlockingChrome_Explain">This policy controls whether the Check extension blocks access to detected phishing pages in Google Chrome.
+
+When enabled (default): Suspicious and phishing pages are blocked with a warning screen.
+When disabled: Pages are only flagged but not blocked (warning mode only).</string>
+
+      <!-- CIPP Reporting - Chrome -->
+      <string id="CheckCippReportingChrome">Enable CIPP reporting (Chrome)</string>
+      <string id="CheckCippReportingChrome_Explain">This policy controls whether the Check extension reports security events to a CIPP (CyberDrain Improved Partner Portal) server in Google Chrome.
+
+When enabled: Security events are sent to the configured CIPP server for centralized monitoring.
+When disabled (default): No reporting to external servers occurs.
+
+Note: Requires CIPP Server URL to be configured.</string>
+
+      <!-- CIPP Server URL - Chrome -->
+      <string id="CheckCippServerUrlChrome">CIPP server URL (Chrome)</string>
+      <string id="CheckCippServerUrlChrome_Explain">This policy specifies the base URL for the CIPP server where security events should be reported from Google Chrome.
+
+Example: https://cipp.yourcompany.com
+
+This setting is only used when CIPP reporting is enabled. The URL should point to a valid CIPP server instance.</string>
+
+      <!-- CIPP Tenant ID - Chrome -->
+      <string id="CheckCippTenantIdChrome">CIPP tenant identifier (Chrome)</string>
+      <string id="CheckCippTenantIdChrome_Explain">This policy specifies the tenant identifier to include with CIPP alerts for multi-tenant environments from Google Chrome.
+
+Example: contoso.onmicrosoft.com
+
+This helps identify which tenant/organization the security event originated from when using a shared CIPP instance.</string>
+
+      <!-- Custom Rules URL - Chrome -->
+      <string id="CheckCustomRulesUrlChrome">Custom detection rules URL (Chrome)</string>
+      <string id="CheckCustomRulesUrlChrome_Explain">This policy specifies a custom URL from which the extension should fetch detection rules in Google Chrome.
+
+Example: https://yourcompany.com/detection-rules.json
+
+When specified, the extension will download detection rules from this URL instead of using the default rules. Leave empty to use default detection rules.
+
+The URL must serve a valid JSON file matching the detection rules schema.</string>
+
+      <!-- Update Interval - Chrome -->
+      <string id="CheckUpdateIntervalChrome">Detection rules update interval (Chrome)</string>
+      <string id="CheckUpdateIntervalChrome_Explain">This policy specifies how often (in hours) the extension should check for updates to detection rules in Google Chrome.
+
+Default: 24 hours
+Range: 1-168 hours (1 hour to 1 week)
+
+More frequent updates provide better protection but may increase network usage.</string>
+
+      <!-- Company Name - Chrome -->
+      <string id="CheckCompanyNameChrome">Company name (Chrome)</string>
+      <string id="CheckCompanyNameChrome_Explain">This policy specifies the company name to display in the extension's user interface for branding purposes in Google Chrome.
+
+Example: Contoso Corporation
+
+The company name appears in the extension popup and settings pages.</string>
+
+      <!-- Product Name - Chrome -->
+      <string id="CheckProductNameChrome">Product name (Chrome)</string>
+      <string id="CheckProductNameChrome_Explain">This policy specifies a custom product name for the extension in Google Chrome.
+
+Example: Contoso Security Guard
+
+This allows organizations to rebrand the extension with their own product name.</string>
+
+      <!-- Support Email - Chrome -->
+      <string id="CheckSupportEmailChrome">Support email address (Chrome)</string>
+      <string id="CheckSupportEmailChrome_Explain">This policy specifies the email address users should contact for support with the extension in Google Chrome.
+
+Example: security@contoso.com
+
+This email address is displayed in the extension interface and help documentation.</string>
+
+      <!-- Primary Color - Chrome -->
+      <string id="CheckPrimaryColorChrome">Primary theme color (Chrome)</string>
+      <string id="CheckPrimaryColorChrome_Explain">This policy specifies the primary theme color for the extension interface using a hex color code in Google Chrome.
+
+Example: #0078D4
+
+The color should be in hex format (e.g., #FF0000 for red, #0078D4 for Microsoft blue). This color is used for UI elements and branding throughout the extension.</string>
+
+      <!-- Logo URL - Chrome -->
+      <string id="CheckLogoUrlChrome">Company logo URL (Chrome)</string>
+      <string id="CheckLogoUrlChrome_Explain">This policy specifies the URL to a company logo that will be displayed in the extension interface in Google Chrome.
+
+Example: https://yourcompany.com/logo.png
+
+The logo should be a square image (recommended size: 48x48 to 128x128 pixels) in PNG, SVG, or other web-compatible format. The logo will be displayed in the extension popup and blocked page.</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="CheckCippServerUrl">
+        <textBox refId="CippServerUrl">
+          <label>CIPP Server URL:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckCippTenantId">
+        <textBox refId="CippTenantId">
+          <label>Tenant Identifier:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckCustomRulesUrl">
+        <textBox refId="CustomRulesUrl">
+          <label>Custom Rules URL:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckUpdateInterval">
+        <decimalTextBox refId="UpdateInterval" defaultValue="24">Update Interval (hours):</decimalTextBox>
+      </presentation>
+      <presentation id="CheckCompanyName">
+        <textBox refId="CompanyName">
+          <label>Company Name:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckProductName">
+        <textBox refId="ProductName">
+          <label>Product Name:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckSupportEmail">
+        <textBox refId="SupportEmail">
+          <label>Support Email:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckPrimaryColor">
+        <textBox refId="PrimaryColor">
+          <label>Primary Color (hex code):</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckLogoUrl">
+        <textBox refId="LogoUrl">
+          <label>Logo URL:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckCippServerUrlChrome">
+        <textBox refId="CippServerUrlChrome">
+          <label>CIPP Server URL:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckCippTenantIdChrome">
+        <textBox refId="CippTenantIdChrome">
+          <label>Tenant Identifier:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckCustomRulesUrlChrome">
+        <textBox refId="CustomRulesUrlChrome">
+          <label>Custom Rules URL:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckUpdateIntervalChrome">
+        <decimalTextBox refId="UpdateIntervalChrome" defaultValue="24">Update Interval (hours):</decimalTextBox>
+      </presentation>
+      <presentation id="CheckCompanyNameChrome">
+        <textBox refId="CompanyNameChrome">
+          <label>Company Name:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckProductNameChrome">
+        <textBox refId="ProductNameChrome">
+          <label>Product Name:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckSupportEmailChrome">
+        <textBox refId="SupportEmailChrome">
+          <label>Support Email:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckPrimaryColorChrome">
+        <textBox refId="PrimaryColorChrome">
+          <label>Primary Color (hex code):</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckLogoUrlChrome">
+        <textBox refId="LogoUrlChrome">
+          <label>Logo URL:</label>
+        </textBox>
+      </presentation>
+      <presentation id="CheckUrlAllowlist">
+        <listBox refId="UrlAllowlistList">URL Allowlist (URLs with wildcards or regex patterns):</listBox>
+      </presentation>
+      <presentation id="CheckUrlAllowlistChrome">
+        <listBox refId="UrlAllowlistListChrome">URL Allowlist (URLs with wildcards or regex patterns):</listBox>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>
