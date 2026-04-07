@@ -6,15 +6,18 @@ $RegistryName = "ExcludeWUDriversInQualityUpdate"
 $RegistryValue = 1
 
 try {
-    # Check if the registry key exists
-    if (Test-Path -Path $RegistryPath) {
-        # Check if the specific value already exists
-        $KeyValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue
-        
-        if ($null -ne $KeyValue.$RegistryName) {
-            Write-Host "Registry key already exists: $RegistryPath\$RegistryName = $($KeyValue.$RegistryName)" -ForegroundColor Yellow
-            exit 0  # Key already exists, exit successfully
-        }
+    # Create the registry path if it doesn't exist
+    if (-not (Test-Path -Path $RegistryPath)) {
+        New-Item -Path $RegistryPath -Force | Out-Null
+        Write-Host "Created registry path: $RegistryPath" -ForegroundColor Blue
+    }
+    
+    # Check if the specific value already exists
+    $KeyValue = Get-ItemProperty -Path $RegistryPath -Name $RegistryName -ErrorAction SilentlyContinue
+    
+    if ($null -ne $KeyValue.$RegistryName) {
+        Write-Host "Registry key already exists: $RegistryPath\$RegistryName = $($KeyValue.$RegistryName)" -ForegroundColor Yellow
+        exit 0  # Key already exists, exit successfully
     }
     
     # If we reach here, the key doesn't exist, so add it
