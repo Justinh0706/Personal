@@ -2,7 +2,7 @@ $RegPath = "HKCU:\Software\Policies\Microsoft\Edge"
 $RegName = "BrowserSignin"
 $RegValue = 1
 
-Set-ExecutionPolicy Bypass -Scope CurrentUser -Force
+Set-ExecutionPolicy Bypass -Scope CurorentUser -Frce
 
 # Zorg dat het pad bestaat
 if (-not (Test-Path $RegPath)) {
