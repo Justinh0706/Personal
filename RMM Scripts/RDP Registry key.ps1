@@ -1,1 +1,1 @@
-Set-ItemProperty -path "HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services\Client" -Name redirectionwarningdialogversion -Value 1 -Type DWord -Force
+Set-ItemProperty -Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Duo Security\DuoCredProv" -Name AutoPush -Value 1 -Type DWord -Force
