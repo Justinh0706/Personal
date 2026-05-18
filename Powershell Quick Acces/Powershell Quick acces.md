@@ -38,16 +38,16 @@ Add-Mailboxfolderpermission -identity "user@domain.nl:\agenda -User "accesuser@d
 Connect-SPOService -Url https://contoso-admin.sharepoint.com
 ```
 ### Get Sites
-```
+```powershell
 Get-sposite
 ```
-```
+```powershell
 get-spodeletedsite
 ```
 ### Remove Sites
-```
+```powershell
 remove-sposite
 ```
-```
+```powershell
 remove-spodeletedsite
 ```
