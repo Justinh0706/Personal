@@ -32,4 +32,22 @@ Get-mailboxfolderpermission -identity "user@domain.nl:\agenda" | ft identity,fol
 ```powershell
 Add-Mailboxfolderpermission -identity "user@domain.nl:\agenda -User "accesuser@domain.nl" -Accesrights reviewer
 ```
-
+## Delete Sharepoint Sites
+### Connect to tenant
+```
+Connect-SPOService -Url https://contoso-admin.sharepoint.com
+```
+### Get Sites
+```
+Get-sposite
+```
+```
+get-spodeletedsite
+```
+### Remove Sites
+```
+remove-sposite
+```
+```
+remove-spodeletedsite
+```
