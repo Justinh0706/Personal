@@ -51,3 +51,10 @@ remove-sposite
 ```powershell
 remove-spodeletedsite
 ```
+### Change folder permissions
+```cmd
+takeown /F "full path of folder or drive" /A /R /D Y
+```
+```
+icacls "c:\somelocation\of\path" /q /c /t /grant Users:F
+```
