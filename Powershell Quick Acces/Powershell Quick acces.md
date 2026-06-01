@@ -55,6 +55,6 @@ remove-spodeletedsite
 ```cmd
 takeown /F "full path of folder or drive" /A /R /D Y
 ```
-```
+```cmd
 icacls "c:\somelocation\of\path" /q /c /t /grant Users:F
 ```
