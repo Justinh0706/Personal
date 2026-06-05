@@ -75,7 +75,7 @@ To: Voeg hier weer een SNAT toe met het IP adres van de SRV-01
 Sla deze policy weer op.
 
 - Nu passen we een bestaande policy aan om de Ping door te laten van PRTG. Dubbelklik op de ping policy en voeg de alias whitelist-ping toe. Sla dit op.
-### Entra ID
+#### Entra ID
 Voor Entra heb je in de blauwdruk geen port forwardings nodig in de firewall. Kijk dit wel goed na, ze kunnen bijvoorbeeld nog camera's hebben of andere apparatuur die dit nodig kan hebben.
 Wel moet je de ping doorlaten nog voor PRTG. Pas de bestaande policy Ping aan. Dubbelklik op de ping policy en voeg de alias whitelist-ping toe. Sla dit op.
 ### Watchguard als DHCP & DNS server + Conditional DNS forwarding (Enkel bij Entra ID/Entra Connect omgevingen)
@@ -114,3 +114,160 @@ Interface Type: External
 Use DHCP Client
 - Wanneer de poort ingesteld is moet je deze verder configureren onder Multi-WAN. Onder Multi-WAN configuration laat je deze op Failover staan. Onder Configure zet je de hoofdverbinding naar boven en de 5G verbinding altijd daaronder. Ander gebruikt hij de 5G verbinding als primaire verbinding. Onder Failback for Active Connections zet je deze op Gradual failback: Allow connections to use failover interface.
 - Nu stellen we de link monitor in. De link monitor stuurt een ping naar een DNS server toe zoals 1.1.1.1 om te kijken of de verbinding nog online is. Wanneer de ping stopt zal hij overschakelen naar de failover verbinding. Onder monitored interfaces voeg je de primaire verbinding toe. Hier kies je nooit de 5G verbinding! Hierna vul je onder settings de DNS server in waarnaar je wilt pingen. 
+
+## Watchguard Cloud Management
+
+We beheren de Watchguard routers van onze klanten (ook niet serviceovereenkomst) via de Watchguard Cloud. Vooralsnog doen we dit alleen om de Firmware centraal te kunnen updaten. In de toekomst zullen we ook Policy's centraal uitrollen via dit systeem.
+
+- Login op: [https://cloud.watchguard.com/](https://cloud.watchguard.com)
+- SSO login met IDP name **SupracomBV**
+- Bestaat de klant nog niet dan moet je deze aanmaken met exact dezelfde naam als in HaloPSA
+- Klik in de linker kolom eerst op **Overview**
+- Via **Inventory** ga je naar **Unallocated** en klik je je toegevoegde Firebox aan en koppelt deze aan de klant
+- Klik in de linker kolom nu op de klantnaam
+  - Ga naar **Configure > Devices**. Hier kun je nu het device toevoegen
+  - Kies bij **Device Management** voor **Local Managment** anders wordt je lokale configuratie gewist.
+  - In principe hoef je niks te doen met verificatie als je FW up to date is (> v12.0) De rest doe je vanaf de Firebox.
+
+  ## PRTG Monitoring
+Je bent bezig met de installatie van een router die verbonden zal worden met het internet. Vanwege onze dienstverlening is het noodzakelijk om de internetverbinding(en), indien nog niet gebeurd, op te nemen in de monitoring.
+
+Volg hiervoor het volgende artikel: [WAN monitoring met PRTG](https://bookstack.supracom.stellarhosted.com/books/monitoring/page/wan-monitoring-met-prtg).
+
+#### Oude Firebox verwijderen
+Wanneer een Firebox vervangen wordt, moet de oude verwijderd worden uit het productoverzicht
+
+- Verwijder de Firebox uit de Watchguard Cloud
+- Ga vervolgens naar [https://myproducts.watchguard.com/manage-products](https://myproducts.watchguard.com/manage-products)
+- Zoek het device op en klik op **Retire**
+
+## SSL VPN met DUO MFA via RADIUS
+Het is mogelijk om VPN verbindingen naar een Watchguard firewall te beveiligen met MFA. Hier is wel een lokale Active Directory omgeving voor nodig, omdat dit via RADIUS loopt.
+
+- In het volgende Watchguard artikel staat alles uitgelegd: [https://www.watchguard.com/help/docs/help-center/en-US/Content/Integration-Guides/General/duo-security-authentication.html](https://www.watchguard.com/help/docs/help-center/en-US/Content/Integration-Guides/General/duo-security-authentication.html)
+
+- Wanneer je binnen de Watchguard de RADIUS Authenticator Server toevoegt, zorg ervoor dat het vinkje bij: Require the Message-Authenticator Attribute UIT staat. 
+
+
+## SSL VPN met Entra MFA
+
+##### Voorwaarden
+-	Lokale AD server met Entra Cloud Sync (Niet te verwarren met Entra/Azure AD Connect)
+-	NPS server geïnstalleerd met **MFA PS extension**
+-	AD security group **SSLVPN-Users**
+-	Tenant minimaal **Entra P1** capable
+-	Radius poorten open in firewall server
+-	De gebruiker logt in met de volledige UPN (gebruikersnaam@domeinnaampraktijk.nl)
+
+##### Installatie NPS en RADIUS server
+Als voorbereiding installeer je de **Network Policy and Access Service** rol via de **Server Manager**
+
+Configureer deze met de volgende opties:
+
+**Radius Client**
+- Friendly name: **Watchguard**
+- Address: IP van de watchguard, bijvoorbeeld **192.168.10.1**
+- Shared secret: genereren en in ITglue opslaan
+
+**Policies**
+Volg de wizard voor een nieuwe Network Policy
+	
+- Policy name: **Watchguard**
+- Condition: User group (Bijvoorbeeld **AD\SSLVPN-Users**)
+- **Access granted**
+- EAP Types: Voor SSLVPN is een vinkje bij PAP voldoende. Rest default laten.
+- Constraints: default laten
+- Settings: **Standard** add (Filter-Id = **SSLVPN-Users**)
+
+##### Installatie watchguard
+Voeg op de watchguard onder Authentication servers een RADIUS server toe.
+- IP Address: Het IP van de NPS server
+- Port: 1812
+- Shared Secret: De shared secret die in IT glue staat die gemaakt is op de NPS
+
+Controleer nu of je in kunt loggen op de VPN met een ad gebruiker (let op, log in met een UPN). Nadat de MFA extensie is geïnstalleerd is dit deel troubleshooten lastig.
+Gelukt? dan installeren we nu de MFA extensie op de NPS service:
+
+[Download NPS Extension for Azure MFA from Official Microsoft Download Center](https://www.microsoft.com/en-us/download/details.aspx?id=54688)
+
+##### Configuratie MFA Extensie
+Na de installatie van de plug-in moet deze geconfigureerd worden. Dit kan met behulp van Powershell en het bijbehorende script:
+
+```
+cd "C:\Program Files\Microsoft\AzureMfa\Config"
+.\AzureMfaNpsExtnConfigSetup.ps1
+```
+
+Als je de prompt krijgt log je in met de Global Admin. Voer tijdens de installatie ook de Tenant-ID in.
+
+Als het script succesvol uit is gevoerd wordt dit aan het eind ook weergegeven. 
+
+De RADIUS server kan niet overweg met TOTP en dus zal elke validatie falen. Hiervoor stellen we een push bericht in in de MS Authenticator. Deze is vergelijkbaar aan DUO en werkt wel in een keer goed.
+
+Open het register en browse naar:
+```
+Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\AzureMfa
+```
+
+Voeg nu de volgende String Value toe:
+```
+OVERRIDE_NUMBER_MATCHING_WITH_OTP (Value data: FALSE)
+```
+
+##### Testen:
+Log nu in met een gebruiker die de juiste Entra P1 licentie heeft en ook MFA in de MS Authenticator app heeft geregistreerd. 
+De App zal een push bericht geven en na akkoord zal de connectie tot stand komt. Dit laatste stuk kan wel 10 sec duren.
+
+##### Troubleshooting:
+Onderzoeken waarom een gebruiker niet in kan loggen kan lastig zijn omdat een deel van de verificatie in Entra plaatsvindt. 
+Er zijn een paar trucjes die het makkelijker maken:
+
+De eerste is het tijdelijk uitschakelen van de MFA plugin. Hierna is het NPS windows log duidelijker te lezen. Dit kun je doen door een backup te maken van de twee sleutels die in het volgende register pad staan. Verwijder vervolgens deze sleutels en herstart de NPS service.
+```
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AuthSrv\Parameters
+```
+[![](https://bookstack.supracom.stellarhosted.com/uploads/images/gallery/2025-03/scaled-1680-/TZookIFVUzYHPquS-image-1741952582246.png)](https://bookstack.supracom.stellarhosted.com/uploads/images/gallery/2025-03/TZookIFVUzYHPquS-image-1741952582246.png)
+
+Na een succesvolle herstart vind je in de Windows logboeken een duidelijkere aanwijzing waarom een gebruiker niet in kan loggen.
+
+De NPS logboeken kun je vinden in de **Event Viewer > Custom Views > Server Roles > Network Policy and Access Services**
+
+Zet de registersleutel terug en herstart de NPS service om de push weer te testen.
+
+Wil je weten of een gebruiker wel juist heeft gereageerd dan vind je dat in het volgende logboek: **Applications and Services Logs > Microsoft > AzureMfa > AuthZ > AuthZOptCh**
+
+Er is een video die veel voorkomende fouten/oplossingen laat zien: [(146) Basic NPS and MFA extension troubleshooting - YouTube ](https://www.youtube.com/watch?v=EHvqMEjorJk&t=594s)
+
+##### Bronnen:
+[Use Microsoft Entra multifactor authentication with NPS - Microsoft Entra ID | Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/howto-mfa-nps-extension)
+[Azure MFA with NPS extension — WatchGuard Community](https://community.watchguard.com/watchguard-community/discussion/3829/azure-mfa-with-nps-extension)
+[Configure Windows Server to authenticate mobile VPN users with RADIUS and Active Directory](https://techsearch.watchguard.com/KB/WGKnowledgeBase?lang=en_US&SFDCID=kA22A000000XZlhSAG&type=KBArticle)
+
+
+
+## In- of uitschakelen web-interface SSL VPN
+Om de diverse aanmeldpogingen te limiteren welke gegenereerd worden door onze vrienden uit twijfelachtige landen, kunnen we de web-interface van de SSLVPN pagina in- of uitschakelen. Vanaf versie 12.11 is dit helemaal niet meer beschikbaar. Dit is verwijderd in de firmware.
+
+<p class="callout warning">Let op, dit is niet meer nodig als je de nieuwste firmware hebt en de functie Block failed logins aan hebt staan.</p>
+
+- Maak vanuit LAN een SSH verbinding naar de WatchGuard. Dit kan zonder extra tools (mits up-to-date Windows Server) vanuit je Windows CLI.
+
+   ```
+   ssh admin@192.168.10.1 -p 4118
+   ```
+
+- Om de web-interface uit te schakelen graag de volgende commando's gebruiken
+
+   ```
+   WG# config
+   WG(config)# policy
+   WG(config/policy)# no sslvpn web-download enable
+   ```
+
+- Om de web-interface weer in te willen schakelen kan je de volgende commando's gebruiken
+
+   ```
+   WG# config
+   WG(config)# policy
+   WG(config/policy)# sslvpn web-download enable
+   ```
