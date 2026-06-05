@@ -58,3 +58,14 @@ takeown /F "full path of folder or drive" /A /R /D Y
 ```cmd
 icacls "c:\somelocation\of\path" /q /c /t /grant Users:F
 ```
+
+### Repair C drive
+```cmd
+Dism /online /cleanup-image /checkhealth
+```
+```cmd
+dism /online /cleanup-image /scanhealth
+```
+```cmd
+dism /online /cleanup-image /restorehealth
+```
