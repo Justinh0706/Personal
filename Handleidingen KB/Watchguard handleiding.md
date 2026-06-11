@@ -8,16 +8,16 @@ We configureren Watchguard routers bij voorkeur via de System Manager software e
 Er zijn een aantal algemene zaken die je moet uitvoeren voordat je met de daadwerkelijke configuratie kunt beginnen.
 
 ### Voorwerk
-Eerst moeten we de Watchguard activeren in ons portaal. Dit zorgt ervoor dat de feature key vrij komt en hier vernieuwen we de feature keys ook. Ga naar Watchguard.com/activate, vul hier het serienummer in van de Watchguard. Wanneer er nog geen licentie aan gekoppeld zit moet je deze nog apart invullen. Kies hierna voor een naam. Normaal gesproken is het als volgt [T145_praktijk_Naam] Voorbeeld: T145_Tandartspraktijk_Haas.
+ Eerst moeten we de Watchguard activeren in ons portaal. Dit zorgt ervoor dat de feature key vrij komt en hier vernieuwen we de feature keys ook. Ga naar Watchguard.com/activate, vul hier het serienummer in van de Watchguard. Wanneer er nog geen licentie aan gekoppeld zit moet je deze nog apart invullen. Kies hierna voor een naam. Normaal gesproken is het als volgt [T145_praktijk_Naam] Voorbeeld: T145_Tandartspraktijk_Haas.
 
 - Log nu in op de webinterface van de Watchguard. Het standaard ip adres van de Watchguard is 10.0.1.1 bij een factory reset. De LAN poort heeft dan eerst nog geen DHCP. Je zult dus je eigen netwerkadapter in dit subnet moeten zetten om de Watchguard te benaderen. Pas dit dan dus aan naar bijvoorbeeld: IP Adres: 10.0.1.5, Subnetmasker 255.255.255.0, Default Gateway: 10.0.1.1, DNS: 1.1.1.1
 Hierna zou je de watchguard moeten kunnen bereiken.
 - Verbindt nu met de webinterface van de Watchguard middels de link: https://10.0.1.1:8080
-- Doorloop nu de Wizard. Kies als eerste voor locally managed. Hierna vul je de instellingen in naar de omgeving van de klant. Aanrader is wel als je de Watchguard intern voorbereid om de External port op DHCP te laten staan zodat deze een IP adres krijgt vanuit onze DHCP. Dit zorgt ervoor dat hij zijn Feature key uiteindelijk kan ophalen. Wanneer dit allemaal gedaan is kunnen we de External port alvast voorbereiden voor de klant zijn omgeving.
+- Doorloop nu de Wizard. Kies als eerste voor locally-managed. Hierna vul je de instellingen in naar de omgeving van de klant. Aanrader is wel als je de Watchguard intern voorbereid om de External port op DHCP te laten staan zodat deze een IP adres krijgt vanuit onze DHCP. Dit zorgt ervoor dat hij zijn Feature key uiteindelijk kan ophalen. Wanneer dit allemaal gedaan is kunnen we de External port alvast voorbereiden voor de klant zijn omgeving.
 #### Local AD 
 In het geval van een AD omgeving gebruik je voor de DNS de AD server van de klant. Hier draait meestal hun DNS, weet je dit niet zeker kijk dit dan na. Gebruik voor de secondary DNS server bijvoorbeeld cloudfare (1.1.1.1). Domain name hoef je ook enkel in te vullen wanneer de klant een lokale active directory server heeft.
 
-#### Entra ID
+#### Entra 
 In het geval van een entra omgeving stel je de DNS in op bijvoorbeeld cloudflare (1.1.1.1) en als secondary bijvoorbeeld google (8.8.8.8). Domain name hoef je hier niet in te vullen.
 
 - Kies als “Status passphrase” een Horse-Battery-Stable wachtwoord.
@@ -33,7 +33,6 @@ In het geval van een entra omgeving stel je de DNS in op bijvoorbeeld cloudflare
 
 - Schakel **Block Failed Logins** in met de standaard opties: **Setup->Authentication->Authentication Settings->Block Failed Logins**
 - Schakel **Account Lockout** in met de standaard opties: **Setup->Authentication->Authentication Settings->Account Lockout**
-- Schakel **Enable Watchguard Cloud** in onder het menu **Setup -> Watchguard Cloud -> Enable Watchguard Cloud**
 - Registreer de firebox in IT Glue:
     * Naam: RTR-01 (of ander volgnummer indien van toepassing) 
     * Serienummer
@@ -127,7 +126,8 @@ We beheren de Watchguard routers van onze klanten (ook niet serviceovereenkomst)
 - Klik in de linker kolom nu op de klantnaam
   - Ga naar **Configure > Devices**. Hier kun je nu het device toevoegen
   - Kies bij **Device Management** voor **Local Managment** anders wordt je lokale configuratie gewist.
-  - In principe hoef je niks te doen met verificatie als je FW up to date is (> v12.0) De rest doe je vanaf de Firebox.
+  - In principe hoef je niks te doen met verificatie als je FW up to date is (> v12.0) De rest doe je vanaf de Firebox. Als de firmware niet up to date is kan je deze nu updaten.
+  - Onder de Watchguard System Manager schakel je **Enable Watchguard Cloud** in onder het menu **Setup -> Watchguard Cloud -> Enable Watchguard Cloud**
 
   ## PRTG Monitoring
 Je bent bezig met de installatie van een router die verbonden zal worden met het internet. Vanwege onze dienstverlening is het noodzakelijk om de internetverbinding(en), indien nog niet gebeurd, op te nemen in de monitoring.
