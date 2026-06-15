@@ -28,7 +28,7 @@ foreach ($volume in $volumes) {
     if (-not $protectors) {
         Write-Host "No key protectors returned for $mp"
     } else {
-        Write-Host "Found key protector types for $mp:"
+        Write-Host "Found key protector types for ${mp}:"
         $protectors | ForEach-Object { Write-Host " - Type: $($_.KeyProtectorType)  Id: $($_.KeyProtectorId)" }
     }
 
@@ -71,7 +71,7 @@ foreach ($volume in $volumes) {
         }
     }
     catch {
-        Write-Host "Failed to add recovery protector for $mp: $_"
+        Write-Host "Failed to add recovery protector for ${mp}: $_"
     }
 }
 
