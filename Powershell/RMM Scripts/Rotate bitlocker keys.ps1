@@ -32,28 +32,25 @@ foreach ($volume in $volumes) {
         $protectors | ForEach-Object { Write-Host " - Type: $($_.KeyProtectorType)  Id: $($_.KeyProtectorId)" }
     }
 
-    # Try to find an existing RecoveryPassword with an actual password value
-    $rp = $protectors | Where-Object { $_.KeyProtectorType -eq 'RecoveryPassword' -and $_.PSObject.Properties.Match('RecoveryPassword') -and $_.RecoveryPassword }
+    # Try to find an existing RecoveryPassword protector
+    $rp = $protectors | Where-Object { $_.KeyProtectorType -eq 'RecoveryPassword' }
+    
+    # ROTATE: Remove old recovery key if it exists
     if ($rp) {
-        $recoveryKey = $rp.RecoveryPassword
-        Write-Host "Recovery password found for $mp : (hidden)"
-        # Log if not already present
-        $entry = "Volume: $mp - Recovery Key: $recoveryKey"
-        if (-not (Test-Path $logFile) -or -not (Get-Content $logFile | Where-Object { $_ -eq $entry })) {
-            $timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-            Add-Content -Path $logFile -Value "$timestamp - $entry"
-            Write-Host "OK: Recovery key for $mp added to history."
-        } else {
-            Write-Host "No change: recovery key already in history."
+        Write-Host "Removing old RecoveryPassword protector from $mp..."
+        try {
+            Remove-BitLockerKeyProtector -MountPoint $mp -KeyProtectorId $rp.KeyProtectorId -ErrorAction Stop
+            Write-Host "OK: Old recovery protector removed."
+            Start-Sleep -Seconds 1
         }
-        continue
+        catch {
+            Write-Host "Failed to remove old protector: $_"
+        }
     }
 
-    Write-Host "No RecoveryPassword protector with value found for $mp."
-
-    # Option: add a new RecoveryPassword protector and record it
+    # Add new RecoveryPassword protector
     try {
-        Write-Host "Adding a new RecoveryPassword protector to $mp..."
+        Write-Host "Adding new RecoveryPassword protector to $mp..."
         $added = Add-BitLockerKeyProtector -MountPoint $mp -RecoveryPasswordProtector -ErrorAction Stop
         $addedId = $added.KeyProtectorId
         Start-Sleep -Seconds 1
@@ -64,9 +61,9 @@ foreach ($volume in $volumes) {
             $timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
             $entry = "Volume: $mp - Recovery Key: $newKey"
             Add-Content -Path $logFile -Value "$timestamp - $entry"
-            Write-Host "OK: New recovery key added for $mp and logged."
+            Write-Host "OK: New recovery key created and logged for $mp"
         } else {
-            Write-Host "Added protector but could not read the RecoveryPassword property. Check environment/permissions or inspect protectors manually."
+            Write-Host "Added protector but could not read the RecoveryPassword property."
             $volume2.KeyProtector | ForEach-Object { Write-Host " - Type: $($_.KeyProtectorType)  Id: $($_.KeyProtectorId)" }
         }
     }
