@@ -2,9 +2,9 @@
 
 $ErrorActionPreference = "Stop"
 
-$TargetName = "server"
-$Username   = "ad.tandartspraktijkelders.nl\homedir"
-$Password   = "6EwSn8j0%4y@&u"
+$TargetName = ""
+$Username   = ""
+$Password   = ""
 
 # Eventueel bestaande Generic credential verwijderen
 cmdkey /delete:$TargetName 2>$null
