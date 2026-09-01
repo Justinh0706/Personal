@@ -1,11 +1,11 @@
-# Registry Key Configuration for Terminal Services Client Redirection Warning
-# Purpose: Suppress the Terminal Services Redirection Warning Dialog
-# Path: HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services\Client
-# Key: RedirectionWarningDialogVersion (DWORD 32, Value: 1)
+# Registry Key Configuration for Auto-Accept SSO Permissions
+# Purpose: Automatically accept Single Sign-On permissions
+# Path: HKLM\SOFTWARE\Policies\Microsoft\Windows\AAD
+# Key: AutoAcceptSsoPermission (DWORD 32, Value: 1)
 
 # Define registry path
-$registryPath = "HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services\Client"
-$registryKey = "RedirectionWarningDialogVersion"
+$registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AAD"
+$registryKey = "AutoAcceptSsoPermission"
 $registryValue = 1
 $registryType = "DWORD"
 
