@@ -18,6 +18,9 @@ Nu we al het voorwerk hebben gedaan kunnen we alle policies gaan deployen. Dit d
 
 Het duurt ongeveer een uurtje voordat dit allemaal deployed is. Geef het dus even de tijd. Wanneer hij klaar is kijk je goed of alle policies wel deployed zijn. Zo niet deploy je deze nogmaals.
 
+### Assignment (Nog toevoegen)
+Dit stuk moet ik nog beschrijven.
+
 ##### Optie 1: Autopilot registratie via CIPP (voorkeur)
 
 Via CIPP kunnen we als Microsoft CSP partner Autopilot devices toevoegen aan onze klanttenants. Voorwaarde hiervoor is dat we een bestaande CSP relatie hebben, wat in vrijwel alle gevallen ook zo is omdat Supracom ook de licenties levert.
