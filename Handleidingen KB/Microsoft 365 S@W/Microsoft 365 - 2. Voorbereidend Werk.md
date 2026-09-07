@@ -4,7 +4,9 @@ Voordat je met dit hoofdstuk begint, dient eerst deel 1 van de Microsoft 365 han
 ## Voorwerk voor je begint met het klaarmaken van de Tenant
 Hier beginnen we met het voorbereidende werk zodat we zometeen alle configuration policy's, Conditional acces policy's en compliance policy's kunnen gaan deployen.
 
-Er zijn een aantal zaken nodig om dit te deployen. In de policy's zitten namelijk assignments filters en groupen vewerkt. Zonder deze groepen en filters zullen alle assignments falen omdat deze niet aanwezig zijn. We starten hier dus eerst mee.
+Er zijn een aantal zaken nodig om dit te deployen. In de policy's zitten namelijk assignments filters en groupen vewerkt. Zonder deze groepen en filters zullen alle assignments falen omdat deze niet aanwezig zijn. We starten eerst met het assignen van de baseline aan de tenant die we gaan opzetten in Inforcer. 
+
+Ga naar Inforcer en kies voor Align > Baseline > SAW - Full Baseline > Edit > Aligned tenants en zet een vinkje bij de tenant die we opzetten en klik op save.
 
 ### Hernoemen oude policy's (Enkel bij bestaande Microsoft 365 omgeving.)
 Eerst zorg je dat alle assignments nagekeken zijn. Hiervoor gebruik je de Intune Assistant (Assignments > Configuration Assignments (All)). Hernoem de oude policy’s naar _LEGACY – zodat deze herkend worden in de intuneops tool die aanleverd is door SAW. Nergens mag All devices staan en moet dit omgezet worden naar een groep.
