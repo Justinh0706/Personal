@@ -19,7 +19,15 @@ Nu we al het voorwerk hebben gedaan kunnen we alle policies gaan deployen. Dit d
 Het duurt ongeveer een uurtje voordat dit allemaal deployed is. Geef het dus even de tijd. Wanneer hij klaar is kijk je goed of alle policies wel deployed zijn. Zo niet deploy je deze nogmaals.
 
 ### Assignment (Nog toevoegen)
-Dit stuk moet ik nog beschrijven.
+Om de assignments toe te voegen hebben we een aantal zaken te regelen. We hebben eerst de CSV file nodig van S@W. Hier staan alle assignments in die we nodig hebben om de configuration policies te assignen aan een groep. Ook moeten we de klant onboarden in Intune Assistant. 
+
+Eerst gaan we naar Intuneassistant.cloud. Hier log je in met je account en ga je uiteindelijk naar customer setting (Functie word beschikbaar als je met je muis op je account staat). Hier gaan we naar add tenants > load tenants. Voeg hier de tenant toe en accepteer de app registration met jou GDAP account (Eigen account). Hierna kunnen we assignment manager toepassen op de tenant. Dit doen we door de tenant te editten en Assignment manager op enabled te zetten. Hierna kunnen we beginnen met de assignments.
+
+Om de assignments uit te voeren moeten we in de "context" werken van de klant tenant. Om in die context te werken editen we de klant weer onder customer settings en zetten we de tenant als context. 
+
+Als de klant een bestaande Microsoft 365 omgeving heeft moeten we deze eerst inspecteren voor assignments op all devices/all users. Dit doen we omdat deze niet excluded kunnen worden, deze moeten op een groep komen te staan zodat de exclusions zouden kunnen maken zo nodig. Dit kunnen we doen door naar Assignments > configuration policies te gaan. Inspecteer hier of alles juist staat. Deze stap kan je overslaan als dit een greenfield tenant is.
+
+Om de assignments uit te voeren gaan we naar Assignment manager > Intune Assignments. Hier importeren we nu de CSV die aangeleverd is. Deze valt de vinden onder onze Projecten sharepoint onder General > Bestanden > Secure at Work. Hier zie je nu alle assignments die hij heeft opgehaald uit de CSV. Deze kunnen we nu vergelijken met de tenant zijn assignments, druk hiervoor op Compare rows, kijk nu even goed wat of er iets mis is gegaan. Het kan zijn dat er policies missen of dat de CSV outdated is, let hier even goed op en controleer dit goed. Mocht alles correct zijn klikken we op select all en starten we de migratie. Wanneer deze klaar is kunnen we een verificatie doen van de assignments. Dit doen ze omdat Microsoft Graph soms false positives kan geven omdat de module gewoon simpelweg loom is. Alle assignments zijn nu gedaan!
 
 ##### Optie 1: Autopilot registratie via CIPP (voorkeur)
 

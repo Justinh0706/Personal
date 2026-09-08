@@ -8,7 +8,7 @@ Maak alle gebruikersaccounts aan. Shared (generieke) accounts beveiligen we met 
 - Leg ook een aparte werkplek pincode vast in Hudu
 
 
-<p class="callout info">Het werken met pincode authenticatie via Windows Hello for Business is veiliger, en gebruiksvriendelijker. Deze aanmeldmethode wordt ook gezien als Phishing Resistant MFA, waardoor we gedeelde werkplekken niet hoeven uit te sluiten van MFA Conditional Access Policy's</p>
+<p class="callout info">Het werken met pincode authenticatie via Windows Hello for Business is veiliger en gebruiksvriendelijker. Deze aanmeldmethode wordt ook gezien als Phishing Resistant MFA, waardoor we gedeelde werkplekken niet hoeven uit te sluiten van MFA Conditional Access Policy's</p>
 
 <p class="callout warning">Indien er sprake is van Entra Cloud Sync vanuit een lokale Active Directory, dan maak je de gebruikers en Assigned groepen niet aan in Entra, maar via AD. Onderstaand script is in dat geval ook NIET te gebruiken.</p>
 
