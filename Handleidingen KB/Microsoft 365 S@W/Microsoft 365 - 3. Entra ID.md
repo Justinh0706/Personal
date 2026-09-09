@@ -20,6 +20,8 @@ Download het script in onze Github. Gebruik hiervoor de Supracom-Script-download
 
 https://github.com/Supracom/Supracom/blob/master/Microsoft%20Entra/Entra%20Users%20S%40W.ps1
 
+De users kan je dan lid maken van de groep **AAD_UA_ModernWorkplace**. Deze groep is namelijk assigned aan de policies die gericht zijn voor de werkplekken die wij het meest gebruiken. Voor andere computers zoals aanmeldschermen kunnen we de kiosk groepen gebruiken.
+
 ##### Persoonlijke accounts
 Maak nu ook alle persoonlijke accounts aan. Dit zijn meestal accounts voor een tandarts/eigenaar en de praktijkmanager. Deze accounts krijgen hun eigen persoonlijke wachtwoord.
 
@@ -134,7 +136,7 @@ Set-AzureADKerberosServer -Domain $domain -CloudCredential $cloudCred -DomainCre
 - Configureer in Intune een nieuwe Configuration Policy met de naam **Supracom: Kerberos Cloud Trust**
 - **Windows 10 en hoger** -> **Settings Catalog**
 - Zoek in de instellingen naar **Use Cloud Trust for On Prem Auth** en schakel deze optie in
-- Assign deze Policy aan de groepen **Devices-EntraJoined** en aan **Users-AllUsers**
+- Assign deze Policy aan de groepen **AAD_UA_ModernWorkplace**
 
 <p class="callout warning">Je kunt de werking NIET testen met een Domain Admin account. Die werken niet in combinatie met Kerberos Cloud Trust. Gebruik dus altijd een normale gebruiker om te testen.</p>
 

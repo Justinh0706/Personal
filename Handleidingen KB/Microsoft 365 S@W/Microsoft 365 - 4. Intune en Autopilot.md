@@ -13,12 +13,15 @@ Controleer of alle standaard URL's zijn ingevuld bij de Automatic Enrollment ins
 ##### DNS Records
 Dubbelcheck of de benodigde DNS records voor Intune zijn aangemaakt op de domeinnaam. Gebruik hiervoor de optie **CNAME Validation**
 
+## Users toevoegen aan groepen
+Voordat we beginnen is het absoluut essentieel dat er bepaalde users al lid zijn van bepaalde groepen. Als we namelijk de conditional acces policies gaan deployen moeten we de Global admin excluden hiervan door deze lid te maken van de groep **AAD_UA_ConAcc-Breakglass**. Dit zorgt ervoor dat conditional acces policies niet deployed worden op de global admin. Dit kunnen we dan later 1 voor 1 excluden. **Dit nog verder uitschrijven hoe we dit gaan inzetten**
+
 ## Deployen van policies
 Nu we al het voorwerk hebben gedaan kunnen we alle policies gaan deployen. Dit doen we door middel van Inforcer. Zojuist hebben we in Inforcer een baseline toegepast op de tenant die je wilt gaan voorbereiden. Om die policies te gaan pushen gaan we nu naar Inforcer > Align > Align by Tenant > (Jou tenant) en filter dan op Recommended from baseline. We selecteren hier alle policies en klikken op Align. We krijgen nu een redelijke lijst met opties. Voor alle policies moeten we enkel **Deploy scope tags** aan hebben staan, op de conditional acces policies na. Hier moeten we **Force set policy state** en **Overwrite Policy with the same name** uit hebben staan. Wanneer je dit allemaal geselecteerd hebt gaan we verder. Kijk hier of je alles goed geselecteerd hebt en pas zo nodig aan.
 
-Het duurt ongeveer een uurtje voordat dit allemaal deployed is. Geef het dus even de tijd. Wanneer hij klaar is kijk je goed of alle policies wel deployed zijn. Zo niet deploy je deze nogmaals.
+Het duurt ongeveer een uurtje voordat dit allemaal deployed is. Geef het dus even de tijd. Wanneer hij klaar is kijk je goed of alle policies wel deployed zijn. Zo niet deploy je deze nogmaals. Een veel voorkomende fout is wel een Conditional acces policy die niet wilt deployen. Om precies te zijn is dat CAD019-Intune: Require MFA and set sign-in frequency to every time-v1.0. In de tenants mist er soms een enterprise application waardoor de policy niet deployed kan worden. Hiervoor is een script beschikbaar gezet in onze Github (CreateEnrollmentapp.ps1). Draai eerst dit script en start hierna de deployment van de policy opnieuw.
 
-### Assignment (Nog toevoegen)
+### Assignment
 Om de assignments toe te voegen hebben we een aantal zaken te regelen. We hebben eerst de CSV file nodig van S@W. Hier staan alle assignments in die we nodig hebben om de configuration policies te assignen aan een groep. Ook moeten we de klant onboarden in Intune Assistant. 
 
 Eerst gaan we naar Intuneassistant.cloud. Hier log je in met je account en ga je uiteindelijk naar customer setting (Functie word beschikbaar als je met je muis op je account staat). Hier gaan we naar add tenants > load tenants. Voeg hier de tenant toe en accepteer de app registration met jou GDAP account (Eigen account). Hierna kunnen we assignment manager toepassen op de tenant. Dit doen we door de tenant te editten en Assignment manager op enabled te zetten. Hierna kunnen we beginnen met de assignments.

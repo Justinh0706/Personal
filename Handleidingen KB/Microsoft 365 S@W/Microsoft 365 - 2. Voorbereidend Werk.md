@@ -6,7 +6,7 @@ Hier beginnen we met het voorbereidende werk zodat we zometeen alle configuratio
 
 Er zijn een aantal zaken nodig om dit te deployen. In de policy's zitten namelijk assignments filters en groupen vewerkt. Zonder deze groepen en filters zullen alle assignments falen omdat deze niet aanwezig zijn. We starten eerst met het assignen van de baseline aan de tenant die we gaan opzetten in Inforcer. 
 
-Ga naar Inforcer en kies voor Align > Baseline > SAW - Full Baseline > Edit > Aligned tenants en zet een vinkje bij de tenant die we opzetten en klik op save.
+Ga naar Inforcer en kies voor Align > Baseline > SAW - Full Baseline > Edit > Aligned tenants en zet een vinkje bij de tenant die we opzetten en klik op save. De full baseline is handig om te gebruiken als je alles wilt gaan deployen in 1 keer. De partial baselines zijn uiteindelijk wel handiger om te gebruiken omdat je problemen hier makkelijk mee kan troubleshooten. Het maakt uiteindelijk niet heel veel uit welke je gebruikt.
 
 ### Hernoemen oude policy's (Enkel bij bestaande Microsoft 365 omgeving.)
 Eerst zorg je dat alle assignments nagekeken zijn. Hiervoor gebruik je de Intune Assistant (Assignments > Configuration Assignments (All)). Hernoem de oude policy’s naar _LEGACY – zodat deze herkend worden in de intuneops tool die aanleverd is door SAW. Nergens mag All devices staan en moet dit omgezet worden naar een groep.
@@ -22,3 +22,4 @@ Eerst gaan we naar Inforcer, en ga hier naar de Baseline Tenant > Groups. Rechts
 Nu kunnen we de Nested Groups assignen. Het script samen met de CSV is beschikbaar onder de Projecten Sharepoint General > Bestanden > Secure at Work > Nested Group Script > NestedGroupMembership-GUI. Wanneer je deze gestart hebt kunnen we na gaan denken welke optie wij willen kiezen. Je hebt namelijk 3 opties, "All (No Phase filtering)" kunnen we gebruiken om een report te maken van de huidige omgeving. Die zal in eerste instantie toch nog geen assignments hebben dus hoeven we deze nog niet te draaien. De optie "Building" gebruiken we in het geval van een bestaande omgeving die nog steeds beheerd word door de oude tenant. Dit zorgt er namelijk voor dat de Autopilot assignments nog niet gedaan worden, wat er uiteindelijk voor zorgt dat wij nog geen zorg hierover dragen. Normaal gesproken hoeven wij ons hier niet druk over te maken.
 
 In dit geval gaan we ervan uit dat we een "Greenfield" tenant hebben. Connect eerst met de tenant die we gaan opzetten. Gebruik de optie "Done (Customer fully rolled out)" en onder What to do vinken we apply (make changes) en Create missing groups aan. Run hierna het script en wacht tot alle assignments gedaan zijn.
+
