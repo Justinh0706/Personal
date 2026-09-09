@@ -18,7 +18,7 @@ Maak alle gebruikersaccounts aan. Shared (generieke) accounts beveiligen we met 
 
 Download het script in onze Github. Gebruik hiervoor de Supracom-Script-downloader. Ook kan je hem online downloaden in onze Github. Mocht je nog geen toegang hebben tot onze repository vraag dit dan even aan Matthijs of Justin.
 
-https://github.com/Supracom/Supracom/blob/master/Microsoft%20Entra/Entra%20Users%20and%20Groups.ps1
+https://github.com/Supracom/Supracom/blob/master/Microsoft%20Entra/Entra%20Users%20S%40W.ps1
 
 ##### Persoonlijke accounts
 Maak nu ook alle persoonlijke accounts aan. Dit zijn meestal accounts voor een tandarts/eigenaar en de praktijkmanager. Deze accounts krijgen hun eigen persoonlijke wachtwoord.
