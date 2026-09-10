@@ -20,7 +20,7 @@ Download het script in onze Github. Gebruik hiervoor de Supracom-Script-download
 
 https://github.com/Supracom/Supracom/blob/master/Microsoft%20Entra/Entra%20Users%20S%40W.ps1
 
-De users kan je dan lid maken van de groep **AAD_UA_ModernWorkplace**. Deze groep is namelijk assigned aan de policies die gericht zijn voor de werkplekken die wij het meest gebruiken. Voor andere computers zoals aanmeldschermen kunnen we de kiosk groepen gebruiken.
+De users kan je dan lid maken van de groep **AAD_UG_ModernWorkplace**. Deze groep is namelijk assigned aan de policies die gericht zijn voor de werkplekken die wij het meest gebruiken (Shared werkplekken). Voor andere computers zoals aanmeldschermen kunnen we de kiosk groepen gebruiken.
 
 ##### Persoonlijke accounts
 Maak nu ook alle persoonlijke accounts aan. Dit zijn meestal accounts voor een tandarts/eigenaar en de praktijkmanager. Deze accounts krijgen hun eigen persoonlijke wachtwoord.
@@ -30,31 +30,14 @@ Er zijn een aantal Enterprise Applications die we standaard alvast goedkeuren vo
 
 - Apple Accounts (voor IOS Mail App): [https://aka.ms/ConsentAppleApp](https://aka.ms/ConsentAppleApp)
 
-## Local Administrator Settings
-Binnen Entra zijn diverse instellingen van toepassing met betrekking op lokale Administrator rechten. We gaan een groep aanmaken die op alle werkplekken lokale Administrator rechten krijgt, en we leggen uit hoe je een specifiek account permanent instelt als lokale beheerder. Daarnaast activeren we ook LAPS zodat Admin wachtwoorden geroteerd worden, en opgevraagd kunnen worden in Entra.
-
-
-### Microsoft Entra Local Administrator Password Solution (LAPS) inschakelen
-Voordat we met Intune LAPS kunnen configureren, moeten we dit eerst voor de Tenant inschakelen via Entra.
-
-- Ga naar [https://entra.microsoft.com](https://entra.microsoft.com)
-- Ga naar **Devices -> Overview -> Device Settings**
-- Schakel de optie in bij **Enable Microsoft Entra Local Administrator Password Solution (LAPS)**
-
-
-### Gebruiker niet standaard Local Admin maken
-Standaard krijgt de gebruiker die een computer Entra-Joined, automatisch lokale Administrator rechten. Dit willen wij niet, dus schakelen we dit centraal uit.
-
-- Ga naar [https://entra.microsoft.com](https://entra.microsoft.com)
-- Ga naar **Devices -> Overview -> Device Settings**
-- Zet de optie op **None** bij **Registering user is added as local administrator on the device during Microsoft Entra join**
-
 ### Gebruikers toevoegen aan de lokale Administrators groep
 Soms is het nodig om een gebruiker lid te maken van de lokale Administrator groep. Met een Entra Joined werkplek kun je dit doen middels het volgende commando. Vervang "Rontgen1" met de juiste gebruikersnaam (AzureAD is wel altijd hetzelfde)
 
-```
+```cmd
 net localgroup administrators AzureAD\Rontgen1 /add
 ```
+**Vaak kan dit worden ondervangen door autoelevate en zal dit dus ook de voorkeur krijgen.**
+
 ## Conditional Acces
 Conditional Access is een fundamenteel onderdeel van een goed beveiligde Azure omgeving.
 Belangrijk om te weten over CA policies is dat je voor elk scenario een policy moet hebben. Exclude je bijvoorbeeld een groep gebruikers uit de eerste policy, dan moet je nog een andere policy hebben die deze groep expliciet wél behandelt. Vereis je MFA in een policy én moet het device compliant zijn, dan moet er ook een policy zijn die dit vereist voor non-compliant devices. Als er geen match is voor een gebruiker/groep/locatie, dan heeft dat account vrij toegang tot Azure zonder MFA of andere extra beveiliging.<br></br>
