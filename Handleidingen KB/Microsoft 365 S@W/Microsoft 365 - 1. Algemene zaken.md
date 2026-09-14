@@ -72,6 +72,53 @@ Wanneer we een Tenant overnemen die al is ingericht door een andere partij, moet
 3. Klik op **New Relationship** en kies onze distributeur van Microsoft 365 licenties (Resello/Pax 8)
 4. Gebruik de link in een InPrivate venster en log in met de Global Admin van de klant om de aanvraag goed te keuren.
 
+##### Gedelegeerd beheer (GDAP) via CIPP
+Om technisch beheer te kunnen uitvoeren vanuit ons Partner account (of CIPP) is het nodig om enkele rechten toe te kennen aan ons als partner. Dit wordt voor nieuwe Tenants meteen ingesteld door onze Backoffice, maar bij overname van bestaande omgevingen kan het nodig zijn om nog zelf te doen.
+
+We vragen onderstaande rechten aan in een Tenant. Deze lijst is overgenomen uit de documentatie van CIPP als aanbevolen rechtengroepen om in te stellen op GDAP [https://docs.cipp.app/setup/gdap/recommended-roles](https://docs.cipp.app/setup/gdap/recommended-roles).
+
+* **Application Administrator**
+* **Authentication Policy Administrator**
+* **Cloud App Security Administrator**
+* **Cloud Device Administrator**
+* **Exchange Administrator**
+* **Intune Administrator**
+* **Privileged Authentication Administrator**
+* **Privileged Role Administrator**
+* **Security Administrator**
+* **SharePoint Administrator**
+* **Teams Administrator**
+* **User Administrator**
+    
+##### Tenant onboarden voor GDAP en CIPP beheer
+
+Het is eenvoudiger om deze GDAP relatie in te stellen via CIPP in plaats van via de Microsoft Partner portal. Daarom beschrijven we hier alleen de methode via CIPP.
+
+1. Ga in CIPP naar **Tenant Administration - GDAP Management**
+2. Klik op **Add a Tenant**
+3. Selecteer de **CIPP Defaults** als GDAP Template en klik op **Add Invites**
+4. Open de **Invite** Link nu in een InPrivate venster
+7. Ga akkoord met de GDAP aanvraag met behulp van het **Global Admin** account van de klant zelf. Je moet deze pagina soms een keer refreshen om de knop **Next** actief te maken)
+8. Open nu in je **normale venster** (dus niet InPrivate) de **Onboarding**. Hiermee wordt de Tenant direct zichtbaar in CIPP om verder te beheren. Dit proces kan een paar minuten duren om alle stappen te doorlopen.
+
+<p class="callout info">Let op: de Global Admin van de klant-tenant zelf blijft altijd nog meer rechten houden dan wij met GDAP instellen. Gebruik 		daarom bij voorkeur tijdens een nieuwe Microsoft 365 Setup het Admin account van de klant zelf. Gedelegeerd beheer is met name bedoeld voor de Servicedesk die via CIPP snel veelvoorkomende handelingen kan uitvoeren.</p>
+
+#### Tenant onboarden in Inforcer
+1. Ga in Inforcer naar **Tenants - Partner Center Manager**
+2. Ga naar de tenant die je wilt toevoegen en bekijk de **GDAP status en Security group GDAP**. Als dit op Ready staat kan je door naar stap ....
+3. Klik achter bij missing roles. Laat hier alles standaard staan en druk op **Create** 
+4. Kopieer de link in je browser en log in met de klant tenant om de GDAP relatie toe te staan.
+5. Druk nu achter bij Missing roles onder Security group om de missende roles toe te voegen. Assign hier **Inforcer-Onboarding** als groep. 
+6. Selecteer de tenant en klik op **Onboard Tenant**
+
+#### Tenant onboarden in Intune Assistant
+1. Ga in Intune Assistant naar **Costumer Settings**
+2. Ga naar **Add Tenant** en laad alle tenants.
+3. Selecteer de tenant die we willen onboarden en geef deze een naam onder **Customer name**. Je kan niet verder zonder deze stap te voltooien. Ga nu verder door op **Provision & Continue** te klikken.
+4. Druk op **Start Consent** en accepteer de rechten met je eigen account. 
+5. Sluit de onboarding nu af als deze succesvol is geweest. Open nu de tenant en vink de **Assignment Manager** aan.
+
+
 ## MFA inschakelen voor Global Admin
 
 Voordat we MFA inschakelen voor de gehele Tenant, stellen we eerst de juiste MFA methodes handmatig in voor de Global Admin zodat we zeker weten dat we toegang houden nadat we MFA inschakelen voor de gehele tenant. 

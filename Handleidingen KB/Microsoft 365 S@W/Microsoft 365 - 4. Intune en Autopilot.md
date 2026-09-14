@@ -21,7 +21,26 @@ Nu we al het voorwerk hebben gedaan kunnen we alle policies gaan deployen. Dit d
 
 Het duurt ongeveer een uurtje voordat dit allemaal deployed is. Geef het dus even de tijd. Wanneer hij klaar is kijk je goed of alle policies wel deployed zijn. Zo niet deploy je deze nogmaals. Een veel voorkomende fout is wel een Conditional acces policy die niet wilt deployen. Om precies te zijn is dat CAD019-Intune: Require MFA and set sign-in frequency to every time-v1.0. In de tenants mist er soms een enterprise application waardoor de policy niet deployed kan worden. Hiervoor is een script beschikbaar gezet in onze Github (CreateEnrollmentapp.ps1). Draai eerst dit script en start hierna de deployment van de policy opnieuw.
 
-### Assignment
+### Uitleg Additional Settings
+
+#### Conditional Acces
+
+**Force set policy state**
+De force set policy state onder Conditional acces hoeft niet perse aan aangezien deze altijd al op **report-only** staan vanuit de baseline tenant. Dit hoeven we niet af te dwingen. 
+**Overwrite policy with same name at destination tenant?**
+Overwrite Policy with same name at destination tenant willen we ook niet aan hebben staan omdat dat niet nodig is. Dit zorgt ervoor dat oude policies niet overschreven worden.  
+**Deploy group and directory role assignments?**
+Deze moet **Altijd** aanstaan. Dit zorgt er namelijk voor dat de exclusions aangemaakt worden voor de breakglass en global admin accounts. Zonder dat deze deployed worden zal je jezelf uitsluiten van de tenant omdat er geen exclusions zijn aangemaakt.
+**Deploy location assignments?**
+Er zijn Conditional acces policies die vereisen dat je MFA enkel mag registreren vanuit een trusted location. Als de location assignments niet deployed zijn kan je dus geen MFA registreren waardoor je uitgesloten word van je tenant. 
+**Deploy non-standard cloud application assignments?**
+Dit vinkje is nodig voor een exclusion voor de Intune autopilot registratie. 
+**Deploy authentication assignments?**
+Dit neemt mee of een policy de authentication strenght meeneemt in een policy zoals bijvoorbeeld phishing resistant MFA afdwingen.
+
+
+
+## Assignment
 Om de assignments toe te voegen hebben we een aantal zaken te regelen. We hebben eerst de CSV file nodig van S@W. Hier staan alle assignments in die we nodig hebben om de configuration policies te assignen aan een groep. Ook moeten we de klant onboarden in Intune Assistant. 
 
 Eerst gaan we naar Intuneassistant.cloud. Hier log je in met je account en ga je uiteindelijk naar customer setting (Functie word beschikbaar als je met je muis op je account staat). Hier gaan we naar add tenants > load tenants. Voeg hier de tenant toe en accepteer de app registration met jou GDAP account (Eigen account). Hierna kunnen we assignment manager toepassen op de tenant. Dit doen we door de tenant te editten en Assignment manager op enabled te zetten. Hierna kunnen we beginnen met de assignments.
