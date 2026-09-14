@@ -38,8 +38,6 @@ Dit vinkje is nodig voor een exclusion voor de Intune autopilot registratie.
 **Deploy authentication assignments?**
 Dit neemt mee of een policy de authentication strenght meeneemt in een policy zoals bijvoorbeeld phishing resistant MFA afdwingen.
 
-
-
 ## Assignment
 Om de assignments toe te voegen hebben we een aantal zaken te regelen. We hebben eerst de CSV file nodig van S@W. Hier staan alle assignments in die we nodig hebben om de configuration policies te assignen aan een groep. Ook moeten we de klant onboarden in Intune Assistant. 
 
@@ -50,6 +48,8 @@ Om de assignments uit te voeren moeten we in de "context" werken van de klant te
 Als de klant een bestaande Microsoft 365 omgeving heeft moeten we deze eerst inspecteren voor assignments op all devices/all users. Dit doen we omdat deze niet excluded kunnen worden, deze moeten op een groep komen te staan zodat de exclusions zouden kunnen maken zo nodig. Dit kunnen we doen door naar Assignments > configuration policies te gaan. Inspecteer hier of alles juist staat. Deze stap kan je overslaan als dit een greenfield tenant is.
 
 Om de assignments uit te voeren gaan we naar Assignment manager > Intune Assignments. Hier importeren we nu de CSV die aangeleverd is. Deze valt de vinden onder onze Projecten sharepoint onder General > Bestanden > Secure at Work. Hier zie je nu alle assignments die hij heeft opgehaald uit de CSV. Deze kunnen we nu vergelijken met de tenant zijn assignments, druk hiervoor op Compare rows, kijk nu even goed wat of er iets mis is gegaan. Het kan zijn dat er policies missen of dat de CSV outdated is, let hier even goed op en controleer dit goed. Mocht alles correct zijn klikken we op select all en starten we de migratie. Wanneer deze klaar is kunnen we een verificatie doen van de assignments. Dit doen ze omdat Microsoft Graph soms false positives kan geven omdat de module gewoon simpelweg loom is. Alle assignments zijn nu gedaan!
+
+**Let op!!! Wanneer Intune Assistant vraagt om admin consent voor de applicatie wanneer je de assignments wilt toevoegen moet je inloggen met de link met je global administrator!**
 
 ##### Optie 1: Autopilot registratie via CIPP (voorkeur)
 
