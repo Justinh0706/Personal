@@ -80,6 +80,9 @@
     Same, but leaves the launching console window visible -- useful when
     troubleshooting, e.g. Start-NestedGroupMembershipGUI-WithConsole.cmd.
 #>
+
+Remove-Item "$env:LOCALAPPDATA\.IdentityService" -Recurse -Force -ErrorAction SilentlyContinue
+
 [CmdletBinding()]
 param(
     [string]$ScriptDirectory = $PSScriptRoot,
